@@ -40,7 +40,7 @@ def doorbell():
         send_sms("La porte dit: on sonne.")
         # Don't send SMS too often.
         redis.set("doorbell", "ringing")
-        redis.expire("doorbell", 2)
+        redis.expire("doorbell", 60 * 2)
         status = "SMS sent successfully."
     else:
         status = "SMS already sent."
