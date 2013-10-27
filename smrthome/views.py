@@ -42,9 +42,11 @@ def doorbell():
         redis.set("doorbell", "ringing")
         redis.expire("doorbell", 60 * 2)
         status = "SMS sent successfully."
+        http_status = 200
     else:
         status = "SMS already sent."
-    return jsonify(status=status)
+        http_status = 202
+    return jsonify(status=status), http_status
 
 
 def in_production():
