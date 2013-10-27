@@ -32,7 +32,7 @@ require({
   }
 });
 
-require(['domReady', 'birdwatch/app'],
+require(['domReady', 'app'],
 function (domReady, app) {
   domReady(function () {
     console.log("DOM ready.");
