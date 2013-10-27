@@ -36,10 +36,11 @@ def index():
 
 @app.route('/doorbell')
 def doorbell():
-    if redis.getset("doorbell", "ringing") != "ringing":
+    if redis.get("doorbell") != "ringing":
         send_sms("La porte dit: on sonne.")
         # Don't send SMS too often.
-        redis.expire("doorbell", 60 * 2)
+        redis.set("doorbell", "ringing")
+        redis.expire("doorbell", 2)
         status = "SMS sent successfully."
     else:
         status = "SMS already sent."
